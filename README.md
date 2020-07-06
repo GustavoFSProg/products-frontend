@@ -1,7 +1,7 @@
 # products-frontend
-Projetc frontend with React  
+Project Frontend with React  
 
 <img src="React-logo.png" width="50%" >
 
-Stack
+Stack  <br>
  <a href="https://pt-br.reactjs.org/">React </a>
