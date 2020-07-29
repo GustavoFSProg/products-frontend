@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Toast, { showToast } from '../Toast'
 import Column from '../../components/Column'
-import Row from '../../components/Row'
 import 'react-toastify/dist/ReactToastify.min.css'
 import api from '../../services/api'
 
@@ -19,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Form() {
-  const history = useHistory()
   const classes = useStyles()
 
   const [title, setTitle] = useState('')
