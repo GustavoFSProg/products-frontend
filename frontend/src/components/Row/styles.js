@@ -8,11 +8,6 @@ const StyledRow = styled.div`
   position: relative;
   width: 100%;
 
-  /* border-bottom-color: ${({ theme }) =>
-    theme?.row?.borderColor || theme.colors.primary};
-  border-bottom-style: solid;
-  border-bottom-width: 1px; */
-
   border-radius: ${({ theme, radius }) => theme?.row?.borderRadius || radius};
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};

@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Toast, { showToast } from '../Toast'
+import Column from '../../components/Column'
+import Row from '../../components/Row'
+import 'react-toastify/dist/ReactToastify.min.css'
 import api from '../../services/api'
 
 const useStyles = makeStyles((theme) => ({
@@ -27,12 +32,15 @@ export default function Form() {
 
     const data = { title, description, price, slug }
 
+    if (title === '' || description === '' || price === '' || slug === '') {
+      return showToast({ type: 'error', message: 'All fields are Required!' })
+    }
+
     try {
       await api.post('/register', data)
 
-      alert('Produto Cadastrado com sucesso!')
-
-      history.push('/')
+      showToast({ type: 'success', message: 'Cadastro efetuado com sucesso!' })
+      // history.push('/')
       return data
     } catch (error) {
       return { error }
@@ -40,62 +48,77 @@ export default function Form() {
   }
 
   return (
-    <div align="center" style={{ width: '100%' }}>
+    <>
       <br />
       <br />
-      <div align="center">
+
+      <Column justifyContent="center" size={11}>
         <h2>Cadastro de Produtos</h2>
-      </div>
-      <form
-        onSubmit={formulario}
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-      >
-        <ul style={{ listStyle: 'none', padding: '20px', width: '1200px' }}>
-          <li style={{ padding: '6px' }}>
-            <TextField
-              style={{ width: '40%' }}
-              id="outlined-basic"
-              label="Titulo"
-              variant="outlined"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </li>
-          <li style={{ padding: '6px' }}>
-            <TextField
-              style={{ width: '40%' }}
-              id="outlined-basic"
-              label="Descrição"
-              variant="outlined"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </li>
-          <li style={{ padding: '6px' }}>
-            <TextField
-              style={{ width: '40%' }}
-              id="outlined-basic"
-              label="Preço"
-              variant="outlined"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </li>
-          <li style={{ padding: '6px' }}>
-            <TextField
-              style={{ width: '40%' }}
-              id="outlined-basic"
-              label="Slug"
-              variant="outlined"
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-            />
-          </li>
-        </ul>
-        <button type="submit">Cadastrar</button>
-      </form>
-    </div>
+      </Column>
+
+      <Column justifyContent="center" size={9}>
+        <form
+          onSubmit={formulario}
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+        >
+          <ul style={{ listStyle: 'none', padding: '20px' }}>
+            <li style={{ padding: '6px' }}>
+              <TextField
+                style={{ width: '150%' }}
+                id="outlined-basic"
+                label="Titulo"
+                variant="outlined"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </li>
+            <li style={{ padding: '6px' }}>
+              <TextField
+                style={{ width: '150%' }}
+                id="outlined-basic"
+                label="Descrição"
+                variant="outlined"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </li>
+            <li style={{ padding: '6px' }}>
+              <TextField
+                style={{ width: '150%' }}
+                id="outlined-basic"
+                label="Preço"
+                variant="outlined"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </li>
+            <li style={{ padding: '6px' }}>
+              <TextField
+                style={{ width: '150%' }}
+                id="outlined-basic"
+                label="Slug"
+                variant="outlined"
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+              />
+            </li>
+            <li>
+              <br />
+              <Button
+                color="primary"
+                variant="contained"
+                style={{ width: '150%', height: '40px' }}
+                type="submit"
+              >
+                Cadastrar
+              </Button>
+            </li>
+            <Toast />
+          </ul>
+        </form>
+      </Column>
+    </>
   )
 }
