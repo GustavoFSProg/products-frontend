@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import ButtonAppBar from '../../Material-UI/AppBar'
 import api from '../../services/api'
 
 const StyledTableCell = withStyles((theme) => ({
@@ -61,32 +62,50 @@ export default function Home() {
   const classes = useStyles()
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Titulo do Produto</StyledTableCell>
-            <StyledTableCell align="right">Descricao</StyledTableCell>
-            <StyledTableCell align="right">Preco</StyledTableCell>
-            <StyledTableCell align="right">Slug</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {products.map((produtos) => (
-            <StyledTableRow key={produtos._id}>
-              <StyledTableCell component="th" scope="row">
-                {produtos.title}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {' '}
-                {produtos.description}
-              </StyledTableCell>
-              <StyledTableCell align="right"> {produtos.price}</StyledTableCell>
-              <StyledTableCell align="right"> {produtos.slug}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <ButtonAppBar />
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Titulo do Produto</StyledTableCell>
+              <StyledTableCell align="right">Descricao</StyledTableCell>
+              <StyledTableCell align="right">Preco</StyledTableCell>
+              <StyledTableCell align="right">Slug</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products.map((produtos) => (
+              <StyledTableRow key={produtos._id}>
+                <StyledTableCell component="th" scope="row">
+                  <img
+                    src={`http://localhost:3001/files/${produtos.image}`}
+                    width={'50%'}
+                    height={'40%'}
+                    alt="imagem"
+                  />
+                </StyledTableCell>
+
+                <StyledTableCell component="th" scope="row">
+                  {produtos.title}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {' '}
+                  {produtos.description}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {' '}
+                  {produtos.price}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {' '}
+                  {produtos.slug}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   )
 }

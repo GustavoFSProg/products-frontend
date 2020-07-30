@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Form() {
   const classes = useStyles()
 
+  const [image, setImage] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
@@ -61,6 +62,17 @@ export default function Form() {
           autoComplete="off"
         >
           <ul style={{ listStyle: 'none', padding: '20px' }}>
+            <li style={{ padding: '6px' }}>
+              <TextField
+                type="file"
+                style={{ width: '150%' }}
+                id="outlined-basic"
+                label="Imagem"
+                variant="outlined"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </li>
             <li style={{ padding: '6px' }}>
               <TextField
                 style={{ width: '150%' }}
