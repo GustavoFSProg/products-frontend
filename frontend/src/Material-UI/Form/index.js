@@ -25,17 +25,27 @@ export default function Form() {
   const [price, setPrice] = useState('')
   const [slug, setSlug] = useState('')
 
+  // const data = new FormData()
+
+  // data.append('image', image)
+  // data.append('author', title)
+  // data.append('description', description)
+  // data.append('place', price)
+  // data.append('hashtags', slug)
+
   async function formulario(e) {
     e.preventDefault()
 
-    const data = { title, description, price, slug }
-
-    if (title === '' || description === '' || price === '' || slug === '') {
-      return showToast({ type: 'error', message: 'All fields are Required!' })
-    }
+    const data = { image, title, description, price, slug }
 
     try {
-      await api.post('/register', data)
+      // if (title === '' || description === '' || price === '' || slug === '') {
+      //   return showToast({ type: 'error', message: 'All fields are Required!' })
+      // }
+
+      const response = await api.post('/register', data)
+
+      console.log(response)
 
       showToast({ type: 'success', message: 'Cadastro efetuado com sucesso!' })
       // history.push('/')
@@ -63,15 +73,14 @@ export default function Form() {
         >
           <ul style={{ listStyle: 'none', padding: '20px' }}>
             <li style={{ padding: '6px' }}>
-              <TextField
+              {/* <input
                 type="file"
                 style={{ width: '150%' }}
                 id="outlined-basic"
                 label="Imagem"
                 variant="outlined"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              />
+                onChange={(e) => e.target.files[0]}
+              /> */}
             </li>
             <li style={{ padding: '6px' }}>
               <TextField
